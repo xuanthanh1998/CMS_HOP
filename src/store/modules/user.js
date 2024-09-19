@@ -55,11 +55,9 @@ const actions = {
         const { token, refreshToken, admin } = response.data
         commit('SET_TOKEN', token)
         commit('SET_ACCOUNT_ID', admin.id)
-
         setToken(token)
         setRefreshToken(refreshToken)
         getAllAdmin().then(res => {
-          console.log('res--------------------admin', res)
           removeAllAdmin()
           if (res.error_code === 0) {
             setAllAdmin(res.data)
@@ -74,12 +72,15 @@ const actions = {
   },
 
   // get user info-
-  getInfo({ commit }, userInfo) {
+  getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      console.log('qưeqưewqeqưewqeqưeqưeqưeqưe', state)
-      getInformation({ id: state.accountID }).then(res => {
+      console.log('...getInfo.......................')
+      getInformation(state.token).then(res => {
+        console.log('...getInfo....res...................', res)
         removeAccountInfo()
+
         const admin = res.data
+        console.log('...getInfo.....admin..................', admin)
         const account = {
           ...admin,
           user_name: admin.name
@@ -94,6 +95,9 @@ const actions = {
           commit('SET_INTRODUCTION', account)
 
           const roles = pluck('name', admin.role_admin)
+          // const permissions = pluck('permission_name', admin.permissions)
+
+          // roles = roles.concat(permissions)
           setPermissions(admin.role_admin?.map((p) => p.name) || [])
           setAcountInfo(account)
 

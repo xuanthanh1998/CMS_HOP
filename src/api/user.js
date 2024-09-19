@@ -10,11 +10,11 @@ export function login(data) {
   })
 }
 
-export function getInformation(param) {
+export function getInformation(token) {
   return request({
     url: '/admin/detail',
     method: 'get',
-    params: param
+    data: { token }
   })
 }
 

@@ -7,11 +7,11 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 import accountRouter from '@/router/modules/account'
+import landingPageRouter from '@/router/modules/LandingPage'
 // import voucherRouter from '@/router/modules/voucher'
-import eventRouter from '@/router/modules/event'
-import clubRouter from '@/router/modules/club'
-// import membershipRouter from '@/router/modules/membership'
-import hioRouter from '@/router/modules/hio'
+// import eventRouter from '@/router/modules/event'
+// import clubRouter from '@/router/modules/club'
+// import hioRouter from '@/router/modules/hio'
 
 /**
  * constantRoutes
@@ -91,10 +91,10 @@ export const constantRoutes = [
 export const asyncRoutes = [
 
   accountRouter,
-  // voucherRouter,
-  eventRouter,
-  clubRouter,
-  hioRouter,
+  landingPageRouter,
+  // eventRouter,
+  // clubRouter,
+  // hioRouter,
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

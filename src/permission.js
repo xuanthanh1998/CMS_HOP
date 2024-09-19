@@ -10,12 +10,9 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
-// router.addRoutes(asyncRoutes)
-
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
-
   // set page title
   document.title = getPageTitle(to.meta.title)
 
@@ -23,7 +20,6 @@ router.beforeEach(async(to, from, next) => {
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
-      // nếu đã đăng nhập, hãy chuyển hướng đến trang chủ
       next({ path: '/t99' })
       NProgress.done()
     } else {
@@ -39,12 +35,9 @@ router.beforeEach(async(to, from, next) => {
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
           console.log('accessRoutes.....................', accessRoutes)
           router.addRoutes(accessRoutes)
-          // phương pháp hack để đảm bảo rằng addRoutes đã hoàn tất
-          // đặt thay thế: true, vì vậy điều hướng sẽ không để lại hồ sơ lịch sử
           next({ ...to, replace: true })
         } catch (error) {
           console.log('..2........................')
-          // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)

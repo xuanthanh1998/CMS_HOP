@@ -1,4 +1,3 @@
-
 import Layout from '@/layout'
 
 const accountRouter = {
@@ -21,10 +20,10 @@ const accountRouter = {
       }
     },
     {
-      path: 'list-account-club',
+      path: 'list-account',
       component: () => import('@/views/account/List'),
-      name: 'List Account CLub',
-      meta: { title: 'Quản lý tài khoản CLB'
+      name: 'List Account',
+      meta: { title: 'Quản lý tài khoản'
       // roles: ['role_boss_club', 'role_leader_club']
       }
     }

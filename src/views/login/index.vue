@@ -60,9 +60,7 @@
 </template>
 
 <script>
-import axios from 'axios'
 // import { Message } from 'element-ui'
-import moment from 'moment'
 import { verifyCaptcha } from '@/api/user'
 import { validUsername } from '@/utils/validate'
 
@@ -147,7 +145,6 @@ export default {
       verifyCaptcha({ phone: this.loginForm.phone, password: this.loginForm.password }).then(res => {
         if (res.error_code === 0) {
           this.$refs.loginForm.validate(valid => {
-            console.log('sađâsdá', valid)
             if (valid) {
               this.loading = true
               this.$store.dispatch('user/login', this.loginForm)
@@ -176,28 +173,6 @@ export default {
         return acc
       }, {})
     },
-    onEvent() {
-      // when you need a reCAPTCHA challenge
-      this.$refs.recaptcha.execute()
-    },
-    getCaptcha() {
-      this.keydata = Math.floor(Math.random() * 100000)
-      axios.get(process.env.VUE_APP_BASE_API + '/admin/get-captcha', {
-        params: { keydata: this.keydata },
-        responseType: 'blob'
-      }).then(res => {
-        const urlCreator = window.URL || window.webkitURL
-        this.timeOut = moment(60 * 2 * 1000)
-        this.isTimeOut = false
-        this.imageCaptcha = urlCreator.createObjectURL(res.data)
-      })
-    },
-    backCaptcha() {
-      this.loginForm.captcha = ''
-      this.loginForm.code = ''
-      this.isLogin = false
-      this.getCaptcha()
-    }
   }
 }
 </script>

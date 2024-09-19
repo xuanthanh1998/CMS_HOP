@@ -2,9 +2,9 @@
   <el-row class="app-container list-account">
     <el-row class="list-account__header">
       <el-col :sm="24" style="display:flex;">
-        <h3 style="margin: 0; width: 100%; padding: 10px">Danh sách Tài khoản Câu lạc bộ</h3>
+        <h3 style="margin: 0; width: 100%; padding: 10px">Danh sách tài khoản</h3>
         <div style="width: 100%;">
-          <el-button style="float:right; padding-top: 11px" type="primary" @click="handleCreateAccount">Tạo Account +
+          <el-button style="float:right; padding-top: 11px" type="primary" @click="handleCreateAccount">Tạo tài khoản +
           </el-button>
         </div>
       </el-col>
